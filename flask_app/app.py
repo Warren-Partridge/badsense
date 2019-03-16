@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def error():
-	return "No word specified. format: https://FULL_PATH/<word>"
+	return "No word specified. format: FULL_PATH/<word>"
 
 @app.route('/<word>')
 def index(word):
