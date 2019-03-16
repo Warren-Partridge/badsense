@@ -1,4 +1,4 @@
-chrome.extension.sendMessage({}, function(response) {
+/*chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
@@ -10,4 +10,14 @@ chrome.extension.sendMessage({}, function(response) {
 
 	}
 	}, 10);
-});
+});*/
+
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log(sender.tab ?
+      "from a content script:" + sender.tab.url :
+      "from the extension");
+    if (request.greeting == "hello")
+      sendResponse({farewell: "goodbye"});
+  });
