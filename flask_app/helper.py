@@ -4,7 +4,8 @@ import random
 
 templates = ["Where can I buy %s?", 
 			"I really love %s.", 
-			"%s near me urgent", "where the fuck do I get more %s"]
+			"%s near me urgent", 
+			"where the fuck do I get more %s"]
 
 def get_similar(word):
 	response = requests.get(f'http://api.datamuse.com/words?ml={word}').json()
