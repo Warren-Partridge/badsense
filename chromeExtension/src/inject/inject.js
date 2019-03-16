@@ -31,3 +31,9 @@ chrome.extension.sendMessage({}, function(response) {
 	}
 	}, 10);
 });
+
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    alert("I'm a content script and I just heard the request: " + request.keyword);
+  });

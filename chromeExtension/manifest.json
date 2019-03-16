@@ -20,6 +20,9 @@
     "default_title": "browser action demo",
     "default_popup": "src/browser_action/browser_action.html"
   },
+  "permissions": [
+    "activeTab"
+  ],
   "content_scripts": [
     {
       "matches": [
@@ -30,5 +33,8 @@
         "src/inject/inject.js"
       ]
     }
+  ],
+  "web_accessible_resources": [
+    "data/keywords.txt"
   ]
 }
