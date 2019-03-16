@@ -29,6 +29,7 @@
         "<all_urls>"
       ],
       "js": [
+        "js/jquery/jquery.min.js",
         "src/inject/inject.js"
       ]
     }
