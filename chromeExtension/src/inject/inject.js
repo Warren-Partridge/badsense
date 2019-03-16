@@ -15,9 +15,12 @@
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-      "from a content script:" + sender.tab.url :
-      "from the extension");
-    if (request.greeting == "hello")
-      sendResponse({farewell: "goodbye"});
+    // console.log(sender.tab ? "from a content script:" + sender.tab.url : "from the extension");
+
+    alert("I'm a content script and I just heard the request: " + request.keyword);
+
+
+    // if (request.greeting == "hello")
+    //   sendResponse({farewell: "goodbye"});
+
   });
