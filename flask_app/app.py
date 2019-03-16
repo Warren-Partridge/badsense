@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from helper import get_similar, get_sentences
+import os
 
 app = Flask(__name__)
 
