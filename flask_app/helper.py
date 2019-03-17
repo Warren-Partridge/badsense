@@ -3,7 +3,7 @@ import random
 import re
 from unidecode import unidecode
 
-noun_temps = ["Where can I buy %s?", 
+meme_noun_temps = ["Where can I buy %s?", 
 			"I really love %s.", 
 			"%s near me urgent", 
 			"where the fuck do I get more %s",
@@ -26,7 +26,7 @@ noun_temps = ["Where can I buy %s?",
 			"%s bulk order urgent"
 			]
 
-verb_temps = ["Where can I go %s?", 
+meme_verb_temps = ["Where can I go %s?", 
 			"I really love %s.", 
 			"%s interest groups near me", 
 			"is %s a normal hobby",
@@ -35,6 +35,41 @@ verb_temps = ["Where can I go %s?",
 			"is it bad to be %s every day",
 			"how to join %s team",
 			"%s tutorials"]
+
+noun_temps = ["Where can I go %s?",
+			"%s appreciation day",
+			"%s society",
+			"%s club",
+			"%s hobby",
+			"%s facebook group",
+			"buy %s on amazon",
+			"%s bulk order",
+			"where to find %s",
+			"large amounts of %s on short notice",
+			"%s memes",
+			"%s reddit",
+			"%s alternatives",
+			"%s for cheap",
+			"least expensive %s",
+			"most expensive %s",
+			"%s new version",
+			"%s"
+
+]
+
+verb_temps = [
+			"competitive %s",
+			"%s hobby groups near me",
+			"%s clubs near me",
+			"%s meetup",
+			"%s tutorials",
+			"casual %s",
+			"%s tutorials",
+			"daily %s blog",
+			"%s store",
+			"science behind %s",
+			"%s"
+]
 
 def get_similar(word):
 	response = requests.get(f'http://api.datamuse.com/words?ml={word}').json()
