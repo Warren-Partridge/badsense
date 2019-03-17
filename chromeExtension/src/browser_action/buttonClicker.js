@@ -34,6 +34,30 @@ function chooseKeyword(buttonToApplyTo, keywordsPool) {
   return chosenKeyword;
 }
 
+// background code
+
+function click(link) {
+  if (link) {
+    $.post(link.ping, "PING", function(d, s, x){console.log("Sent ping. Status: " + s);});
+  }
+}
+
+function search_query(query) {
+  var results_page;
+  $.get(encodeURI("https://www.google.com/search?q=" + query), "", function(d, t, x) {
+    results_page = $.parseHTML(d);
+
+    var results = $(results_page).find(".r").toArray();
+    console.log(results); 
+
+    for (var i = results.length - 1; i >= 0; i--) {
+      var anchor = $(results[i]).find("a")[0];
+      if (anchor && anchor.ping) {
+        click(anchor.ping);
+      }
+    }
+  })
+}
 
 window.addEventListener('load', function load(event) {
   // Button 0 listener
@@ -121,5 +145,4 @@ window.addEventListener('load', function load(event) {
     choose5Keywords(globalKeywords);
   });
   }
-
 });

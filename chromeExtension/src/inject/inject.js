@@ -36,7 +36,7 @@ function click(links, callback_after_last) {
 		} else {
 			click(links, callback_after_last);
 		}
-	}, 125);
+	}, 250);
 }
 
 function search(term) {
