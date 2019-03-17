@@ -80,7 +80,7 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){ 
-        chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
       }
     });
   };
@@ -92,7 +92,7 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){ 
-        chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
       }
     });
   };
@@ -104,7 +104,7 @@ window.addEventListener('load', function load(event) {
       let resultSearches = $.ajax({
         url:"https://badsense.herokuapp.com/" + keywordToPass,
         success: function(response){ 
-          chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+          chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
         }
       });
     }
@@ -112,25 +112,25 @@ window.addEventListener('load', function load(event) {
 
   // Button 3 listener
   document.getElementById("button3").onclick = () => {
-    let keywordToPass = document.getElementById("button0").innerText;
+    let keywordToPass = document.getElementById("button3").innerText;
     console.log(keywordToPass);
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){
-        chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
       }
     });
 
   };
 
   // Button 4 listener
-  document.getElementById("button3").onclick = () => {
-    let keywordToPass = document.getElementById("button0").innerText;
+  document.getElementById("button4").onclick = () => {
+    let keywordToPass = document.getElementById("button4").innerText;
     console.log(keywordToPass);
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){
-        chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        chrome.extension.sendMessage({type:"add_queries",  bg:"False",queries:response}, function(response) {});
       }
     });
 
