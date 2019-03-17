@@ -6,7 +6,7 @@ body {
 
 #mainPopup {
     height: 335px;
-    width: 235px;
+    width: 250px;
     font-family: Roboto, sans-serif;
 }
 
@@ -14,7 +14,7 @@ body {
     display: flex;
     align-items: center;
     height: 50px;
-    width: 235px;
+    width: 250px;
     background: #2d43bf;
     color: white;
     font-weight: 500;
@@ -23,17 +23,29 @@ body {
 }
 
 #header-text {
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 #body-content {
     color: #444;
-    margin: 10px;
+    margin: 15px;
+    line-height: 1.2rem;
     font-size: 14px;
 }
 
 button {
-    color: blue;
+    border-radius: 17px;
+    color: #2d43bf;
+    /*padding: 7px 20px;*/
+    padding: 3px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #2d43bf;
 }
 
 h1 {
