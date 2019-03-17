@@ -1,26 +1,25 @@
 <!doctype html>
 <head>
-	<script src="buttonClicker.js"></script>
-	<script src="../../js/jquery/jquery.min.js"></script>
-	<style type="text/css">
-		#mainPopup {
-			padding: 10px;
-			height: 200px;
-			width: 400px;
-			font-family: Helvetica, Ubuntu, Arial, sans-serif;
-		}
-		h1 {
-			font-size: 2em;
-		}
-	</style>
+  <script src="buttonClicker.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/styles.css">
 </head>
 
 <div id="mainPopup">
-  <h1>BAdSense</h1>
-  <p>Visit <a href="https://adssettings.google.com" target="_blank">adssettings.google.com</a> to see your preferences.</p>
-  <br>
-  <p>Let's obfuscate this. We recommend adding:</p>
-  <button id="button0">Dogs</button>
-  <button id="button1">Yoga</button>
-  <button id="button2">Gaming</button>
+  <div id="header-box">
+    <div id="header-text">X AdSensible</div>
+  </div>
+
+  <div id="body-content">
+    <p>It looks like you're logged in to Google already. Visit <a href="https://adssettings.google.com" target="_blank">this page</a> to view your inferred demographic info.</p>
+    <p>Let's add something new to the list. How about:</p>
+    <div id="button-container">
+      <button id="button0">Dogs</button>
+      <button id="button1">Yoga</button>
+      <button id="button2">Gaming</button>
+      <button id="refresh-button">R</button>
+      <input type="text" placeholder="Or, type your own...">
+    </div>
+
+    <input type="checkbox">Run in the background</input>
+  </div>
 </div>
