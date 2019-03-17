@@ -96,20 +96,7 @@ var readyStateCheckInterval = setInterval(function() {
 //   });
 // });
 
-<<<<<<< HEAD
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
-   	console.log(request.search);
-   	search(request.search);
-    sendResponse({response: "ok"});
-    
-    return true;
-  });
-=======
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 	console.log(request);
 });
->>>>>>> 7dd6a4fb007d5a0a04923f679a911033e9463d15
+
