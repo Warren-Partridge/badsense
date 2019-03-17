@@ -2,6 +2,13 @@
 var searchArray;
 var globalKeywords;
 
+var query_queue;
+
+if (localStorage.is_bg === undefined){
+  localStorage.is_bg = "false";
+}
+var is_bg = localStorage.is_bg;
+
 const url = chrome.runtime.getURL('data/keywords.json');
 fetch(url)
   .then((response) => response.json())
@@ -17,7 +24,6 @@ function choose5Keywords(keywords) {
   for(let i=0; i<5; i++) {
     chosenKeywords.push(chooseKeyword(i, keywords));
   }
-
   return chosenKeywords;
 }
 
@@ -42,6 +48,18 @@ function click(link) {
   }
 }
 
+function bg_search(response){
+  search_query(response.pop());
+  setTimeout(function(){
+    if(response.length <= 0){
+      return null;
+    }
+    else{
+      bg_search(response);
+    }
+  }, 2000);
+}
+
 function search_query(query) {
   var results_page;
   $.get(encodeURI("https://www.google.com/search?q=" + query), "", function(d, t, x) {
@@ -59,7 +77,9 @@ function search_query(query) {
   })
 }
 
+
 window.addEventListener('load', function load(event) {
+  document.getElementById("is_bg").checked = localStorage.is_bg == 'true'? true : false;
   // Button 0 listener
   document.getElementById("button0").onclick = () => {
     let keywordToPass = document.getElementById("button0").innerText;
@@ -67,7 +87,12 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){ 
-        chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        if(is_bg === "true"){
+          bg_search(response);
+        }
+        else{
+          chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        }
       }
     });
     
@@ -80,7 +105,12 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){ 
-        chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
+        if(is_bg === "true"){
+          bg_search(response);
+        }
+        else{
+          chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        }
       }
     });
   };
@@ -92,7 +122,12 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){ 
-        chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
+        if(is_bg === "true"){
+          bg_search(response);
+        }
+        else{
+          chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        }
       }
     });
   };
@@ -104,7 +139,12 @@ window.addEventListener('load', function load(event) {
       let resultSearches = $.ajax({
         url:"https://badsense.herokuapp.com/" + keywordToPass,
         success: function(response){ 
-          chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
+          if(is_bg === "true"){
+            bg_search(response);
+          }
+          else{
+            chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+          }
         }
       });
     }
@@ -117,7 +157,13 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){
-        chrome.extension.sendMessage({type:"add_queries", bg:"False", queries:response}, function(response) {});
+        if(is_bg === "true"){
+          bg_search(response);
+        }
+        else{
+          chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        }
+        
       }
     });
 
@@ -130,7 +176,12 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){
-        chrome.extension.sendMessage({type:"add_queries",  bg:"False",queries:response}, function(response) {});
+        if(is_bg === "true"){
+          bg_search(response);
+        }
+        else{
+          chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        }
       }
     });
 
@@ -145,4 +196,10 @@ window.addEventListener('load', function load(event) {
     choose5Keywords(globalKeywords);
   });
   }
+
+  document.getElementById("is_bg").onclick = () => {
+    localStorage.is_bg = (localStorage.is_bg == 'true') ? false : true;
+    is_bg = localStorage.is_bg;
+    console.log(is_bg);
+  };
 });

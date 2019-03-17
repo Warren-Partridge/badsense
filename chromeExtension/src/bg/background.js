@@ -16,7 +16,7 @@ chrome.extension.onMessage.addListener(
   	switch (request.type) {
   		case "add_queries":
   			console.log(request.queries);
-  			query_queue = (request.bg == "True") ? query_queue.concat(request.queries) : request.queries;
+  			query_queue = request.queries;
   			console.log(query_queue);
   			sendResponse({});
   			chrome.tabs.create({url: encodeURI("https://www.google.com/search?q=" + query_queue.shift())})

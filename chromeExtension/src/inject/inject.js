@@ -90,7 +90,6 @@ var readyStateCheckInterval = setInterval(function() {
 		click(links, done);
 
 		// ----------------------------------------------------------
-
 	}
 }, 10);
 
