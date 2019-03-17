@@ -50,7 +50,7 @@ window.addEventListener('load', function load(event) {
   };
 
   // Button 1 listener
-  document.getElementById("button0").onclick = () => {
+  document.getElementById("button1").onclick = () => {
     let keywordToPass = document.getElementById("button1").innerText;
     console.log(keywordToPass);
     let resultSearches = $.ajax({
@@ -63,7 +63,7 @@ window.addEventListener('load', function load(event) {
   };
 
   // Button 2 listener
-  document.getElementById("button0").onclick = () => {
+  document.getElementById("button2").onclick = () => {
     let keywordToPass = document.getElementById("button2").innerText;
     console.log(keywordToPass);
     let resultSearches = $.ajax({
