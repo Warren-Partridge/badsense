@@ -44,6 +44,12 @@ function search(term) {
 }
 
 function done() {
+	chrome.extension.sendMessage({type:"next_query"}, function(response) {
+		console.log(response);
+		if (response.query) {
+			search(response.query);
+		}
+	});
 	console.log("Finished clicking links.");
 }
 
@@ -63,7 +69,7 @@ var readyStateCheckInterval = setInterval(function() {
 
 		for (var i = results.length - 1; i >= 0; i--) {
 			var anchor = $(results[i]).find("a")[0];
-			if (anchor.ping) {
+			if (anchor && anchor.ping) {
 				links.push(anchor);
 			}
 		}
@@ -90,6 +96,7 @@ var readyStateCheckInterval = setInterval(function() {
 //   });
 // });
 
+<<<<<<< HEAD
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     console.log(sender.tab ?
@@ -101,3 +108,8 @@ chrome.runtime.onMessage.addListener(
     
     return true;
   });
+=======
+chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
+	console.log(request);
+});
+>>>>>>> 7dd6a4fb007d5a0a04923f679a911033e9463d15

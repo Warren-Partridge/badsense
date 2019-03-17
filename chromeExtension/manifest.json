@@ -21,7 +21,8 @@
     "default_popup": "src/browser_action/browser_action.html"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "tabs"
   ],
   "content_scripts": [
     {
