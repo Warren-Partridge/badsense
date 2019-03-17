@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+
+body {
+    margin: 0;
+}
+
+#mainPopup {
+    height: 335px;
+    width: 235px;
+    font-family: Roboto, sans-serif;
+}
+
+#header-box {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 235px;
+    background: #2d43bf;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+#header-text {
+    padding-left: 10px;
+}
+
+#body-content {
+    color: #444;
+    margin: 10px;
+    font-size: 14px;
+}
+
+button {
+    color: blue;
+}
+
+h1 {
+    color: red;
+    font-size: 2em;
+}

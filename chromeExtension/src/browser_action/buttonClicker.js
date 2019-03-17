@@ -2,7 +2,10 @@
 const url = chrome.runtime.getURL('data/keywords.json');
 fetch(url)
   .then((response) => response.json())
-  .then((json) => choose3Keywords(json.keywords));
+  .then((json) => {
+    var globalKeywords = json.keywords;
+    choose3Keywords(globalKeywords);
+  });
 
 
 function choose3Keywords(keywords) {
@@ -64,7 +67,6 @@ window.addEventListener('load', function load(event) {
   };
 
 
-
-
+  document.getElementById("refresh-button").onclick = () => choose3Keywords(globalKeywords);
 
 });
