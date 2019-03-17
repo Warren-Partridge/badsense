@@ -1,5 +1,6 @@
 var results;
 var links;
+var port;
 
 function clickRequest(link) {
 	if (link) {
@@ -44,11 +45,13 @@ function search(term) {
 
 function done() {
 	console.log("Finished clicking links.");
+	port.postMessage({response:"ok"});
 }
 
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
+		port = chrome.runtime.connect({name: "sending_search"});
 		clearInterval(readyStateCheckInterval);
 
 		// ----------------------------------------------------------
@@ -79,4 +82,11 @@ chrome.extension.sendMessage({}, function(response) {
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     alert("I'm a content script and I just heard the request: " + request.keyword);
+});
+
+chrome.runtime.onConnect.addListener(function(port) {
+  console.assert(port.name == "sending_search");
+  port.onMessage.addListener(function(msg) {
+  	search(msg.search);
   });
+});
