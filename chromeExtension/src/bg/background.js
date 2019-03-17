@@ -24,12 +24,14 @@ chrome.extension.onMessage.addListener(
 
   		case "next_query":
   			if (last_next_query_timestamp === -1) {
+  				console.log("Reset timestamp");
   				last_next_query_timestamp = new Date().getTime();
   			}
 
   			a = (new Date().getTime() - last_next_query_timestamp)
   			if (a > 10000) {
   				console.log("next_query took too long! " + a);
+  				last_next_query_timestamp = -1;
   				sendResponse({});
   				query_queue = [];
   				break;
