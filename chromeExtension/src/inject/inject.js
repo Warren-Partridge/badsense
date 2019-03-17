@@ -98,6 +98,6 @@ chrome.runtime.onMessage.addListener(
    	console.log(request.search);
    	search(request.search);
     sendResponse({response: "ok"});
-
+    
     return true;
   });

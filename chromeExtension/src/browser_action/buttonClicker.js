@@ -1,18 +1,19 @@
 // Get our keywords from ext file
 var searchArray;
+var globalKeywords;
 
 const url = chrome.runtime.getURL('data/keywords.json');
 fetch(url)
   .then((response) => response.json())
   .then((json) => {
-    var globalKeywords = json.keywords;
+    globalKeywords = json.keywords;
     choose3Keywords(globalKeywords);
-  });
-
+});
 
 function choose3Keywords(keywords) {
   let chosenKeywords = [];
-
+  console.log("in 1st");
+  console.log(keywords);
   for(let i=0; i<3; i++) {
     chosenKeywords.push(chooseKeyword(i, keywords));
   }
@@ -22,6 +23,7 @@ function choose3Keywords(keywords) {
 
 
 function chooseKeyword(buttonToApplyTo, keywordsPool) {
+  console.log(keywordsPool);
   let choiceIndex = Math.floor(Math.random() * keywordsPool.length);
   let chosenKeyword = keywordsPool[choiceIndex];
   keywordsPool.splice(choiceIndex, 1); // Pops chosen keyword out of the array
@@ -34,7 +36,6 @@ function chooseKeyword(buttonToApplyTo, keywordsPool) {
 
 
 window.addEventListener('load', function load(event) {
-
   // Button 0 listener
   document.getElementById("button0").onclick = () => {
     let keywordToPass = document.getElementById("button0").innerText;
@@ -78,7 +79,6 @@ window.addEventListener('load', function load(event) {
   // Button 2 listener
   document.getElementById("button2").onclick = () => {
     let keywordToPass = document.getElementById("button2").innerText;
-
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {keyword: keywordToPass}, function(response) {
         console.log(response);
@@ -86,11 +86,14 @@ window.addEventListener('load', function load(event) {
     });
   };
 
-<<<<<<< HEAD
-  
-=======
+  document.getElementById("refresh-button").onclick = () => {
+    choose3Keywords(globalKeywords);
+    fetch(url)
+  .then((response) => response.json())
+  .then((json) => {
+    globalKeywords = json.keywords;
+    choose3Keywords(globalKeywords);
+  });
+  }
 
-  document.getElementById("refresh-button").onclick = () => choose3Keywords(globalKeywords);
-
->>>>>>> 6b4699d17fdcafea46f8c3e247c7a706ce454cf8
 });
