@@ -47,9 +47,9 @@ function done() {
 	console.log("Finished clicking links.");
 }
 
-chrome.extension.sendMessage({}, function(response) {
-	var readyStateCheckInterval = setInterval(function() {
-		console.log("asddsa");
+
+var readyStateCheckInterval = setInterval(function() {
+	console.log("asddsa");
 	if (document.readyState === "complete") {
 		console.log("qwerty");
 		clearInterval(readyStateCheckInterval);
@@ -75,8 +75,7 @@ chrome.extension.sendMessage({}, function(response) {
 		// ----------------------------------------------------------
 
 	}
-	}, 10);
-});
+}, 10);
 
 
 // chrome.runtime.onMessage.addListener(
