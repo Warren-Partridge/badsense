@@ -23,7 +23,7 @@ function clear(link) {
 
 function click(links, callback_after_last) {
 
-	var link = links.shift();
+	var link = links.pop();
 
 	highlight(link);
 	clickRequest(link);
