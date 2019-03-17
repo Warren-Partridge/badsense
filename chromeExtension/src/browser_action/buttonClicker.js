@@ -59,7 +59,6 @@ window.addEventListener('load', function load(event) {
         chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
       }
     });
-    
   };
 
   // Button 2 listener
@@ -72,7 +71,19 @@ window.addEventListener('load', function load(event) {
         chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
       }
     });
-    
+  };
+
+  document.getElementById("custom-search").onkeyup = function(e){
+    if (e.keyCode == 13){
+      let keywordToPass = document.getElementById("custom-search").value;
+      console.log(keywordToPass);
+      let resultSearches = $.ajax({
+        url:"https://badsense.herokuapp.com/" + keywordToPass,
+        success: function(response){ 
+          chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+        }
+      });
+    }
   };
 
   // Button 3 listener
