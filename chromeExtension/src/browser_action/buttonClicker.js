@@ -7,14 +7,14 @@ fetch(url)
   .then((response) => response.json())
   .then((json) => {
     globalKeywords = json.keywords;
-    choose3Keywords(globalKeywords);
+    choose5Keywords(globalKeywords);
 });
 
-function choose3Keywords(keywords) {
+function choose5Keywords(keywords) {
   let chosenKeywords = [];
   console.log("in 1st");
   console.log(keywords);
-  for(let i=0; i<3; i++) {
+  for(let i=0; i<5; i++) {
     chosenKeywords.push(chooseKeyword(i, keywords));
   }
 
@@ -75,13 +75,39 @@ window.addEventListener('load', function load(event) {
     
   };
 
+  // Button 3 listener
+  document.getElementById("button3").onclick = () => {
+    let keywordToPass = document.getElementById("button0").innerText;
+    console.log(keywordToPass);
+    let resultSearches = $.ajax({
+      url:"https://badsense.herokuapp.com/" + keywordToPass,
+      success: function(response){
+        chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+      }
+    });
+
+  };
+
+  // Button 4 listener
+  document.getElementById("button3").onclick = () => {
+    let keywordToPass = document.getElementById("button0").innerText;
+    console.log(keywordToPass);
+    let resultSearches = $.ajax({
+      url:"https://badsense.herokuapp.com/" + keywordToPass,
+      success: function(response){
+        chrome.extension.sendMessage({type:"add_queries", queries:response}, function(response) {});
+      }
+    });
+
+  };
+
   document.getElementById("refresh-button").onclick = () => {
-    choose3Keywords(globalKeywords);
+    choose5Keywords(globalKeywords);
     fetch(url)
   .then((response) => response.json())
   .then((json) => {
     globalKeywords = json.keywords;
-    choose3Keywords(globalKeywords);
+    choose5Keywords(globalKeywords);
   });
   }
 
