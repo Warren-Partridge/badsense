@@ -4,10 +4,32 @@
 //  "sample_setting": "This is how you use Store.js to remember values"
 //});
 
+var query_queue = [];
+
 
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
   function(request, sender, sendResponse) {
-  	chrome.pageAction.show(sender.tab.id);
-    sendResponse();
+
+  	console.log(request);
+
+  	switch (request.type) {
+  		case "add_queries":
+  			console.log(request.queries);
+  			query_queue = query_queue.concat(request.queries);
+  			console.log(query_queue);
+  			sendResponse({});
+  			chrome.tabs.create({url: encodeURI("https://www.google.com/search?q=" + query_queue.shift())})
+  			break;
+
+  		case "next_query":
+  			console.log("aa");
+  			var r = {query:query_queue.shift()};
+  			console.log(r);
+  			sendResponse(r);
+  			break;
+
+  		default:
+  			sendResponse();
+  	}
   });
