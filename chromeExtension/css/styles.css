@@ -62,6 +62,7 @@ body {
     border-radius: 17px;
     padding: 5px;
     outline: none;
+    color: rgba(50, 71, 209, 0.75);
 }
 
 h1 {
