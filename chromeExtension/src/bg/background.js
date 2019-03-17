@@ -5,7 +5,7 @@
 //});
 
 var query_queue = [];
-var last_next_query_timestamp = -1;
+//var last_next_query_timestamp = -1;
 
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
@@ -23,21 +23,21 @@ chrome.extension.onMessage.addListener(
   			break;
 
   		case "next_query":
-  			if (last_next_query_timestamp === -1) {
-  				console.log("Reset timestamp");
-  				last_next_query_timestamp = new Date().getTime();
-  			}
+  			//if (last_next_query_timestamp === -1) {
+  			//	console.log("Reset timestamp");
+  			// last_next_query_timestamp = new Date().getTime();
+  			// }
 
-  			a = (new Date().getTime() - last_next_query_timestamp)
-  			if (a > 10000) {
-  				console.log("next_query took too long! " + a);
-  				last_next_query_timestamp = -1;
-  				sendResponse({});
-  				query_queue = [];
-  				break;
-  			}
+  			// a = (new Date().getTime() - last_next_query_timestamp)
+  			// if (a > 10000) {
+  				// console.log("next_query took too long! " + a);
+  				// last_next_query_timestamp = -1;
+  				// sendResponse({});
+  				// query_queue = [];
+  				// break;
+  			// }
 
-  			last_next_query_timestamp = new Date().getTime();
+  			// last_next_query_timestamp = new Date().getTime();
   			var r = {query:query_queue.shift()};
   			console.log(r);
   			sendResponse(r);

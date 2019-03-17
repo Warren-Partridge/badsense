@@ -3,15 +3,15 @@ var links;
 var port;
 var unload_expected = false;
 
-function onUnload() {
-	if (!unload_expected) {
-		chrome.extension.sendMessage({type:"unload", expected:unload_expected}, function(response) {});
-	} else {
-		console.log("Expected unload");
-	}
-}
+// function onUnload() {
+// 	if (!unload_expected) {
+// 		chrome.extension.sendMessage({type:"unload", expected:unload_expected}, function(response) {});
+// 	} else {
+// 		console.log("Expected unload");
+// 	}
+// }
 
-$(window).unload(onUnload);
+//$(window).unload(onUnload);
 
 function clickRequest(link) {
 	if (link) {
