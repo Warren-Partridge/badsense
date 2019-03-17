@@ -1,4 +1,6 @@
 // Get our keywords from ext file
+var searchArray;
+
 const url = chrome.runtime.getURL('data/keywords.json');
 fetch(url)
   .then((response) => response.json())
@@ -37,15 +39,23 @@ window.addEventListener('load', function load(event) {
     let resultSearches = $.ajax({
       url:"https://badsense.herokuapp.com/" + keywordToPass,
       success: function(response){ 
-        var searchArray = response;
+        searchArray = response;
         console.log(searchArray);
-        var port = chrome.runtime.connect({name: "sending_search"});
-        port.postMessage({search:searchArray.shift()});
-        port.onMessage.addListener(function(msg) {
-          if (msg.response = 'ok' && searchArray.length > 0){
-            port.postMessage({search: searchArray.shift()});
-          }
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, {search: searchArray.shift()}, function(response) {
+            console.log(response)
+          });
         });
+        chrome.runtime.onMessage.addListener(
+          function(request, sender, sendResponse) {
+            console.log(sender.tab ?
+                        "from a content script:" + sender.tab.url :
+                        "from the extension");
+            if (request.response == "ok"){
+              sendResponse({search: searchArray.shift()});
+            }
+            return true;
+          });
       }
     });
     

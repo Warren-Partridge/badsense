@@ -45,13 +45,13 @@ function search(term) {
 
 function done() {
 	console.log("Finished clicking links.");
-	port.postMessage({response:"ok"});
 }
 
 chrome.extension.sendMessage({}, function(response) {
 	var readyStateCheckInterval = setInterval(function() {
+		console.log("asddsa");
 	if (document.readyState === "complete") {
-		port = chrome.runtime.connect({name: "sending_search"});
+		console.log("qwerty");
 		clearInterval(readyStateCheckInterval);
 
 		// ----------------------------------------------------------
@@ -79,14 +79,26 @@ chrome.extension.sendMessage({}, function(response) {
 });
 
 
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     alert("I'm a content script and I just heard the request: " + request.keyword);
+// });
+
+// chrome.runtime.onConnect.addListener(function(port) {
+//   console.assert(port.name == "sending_search");
+//   port.onMessage.addListener(function(msg) {
+//   	search(msg.search);
+//   });
+// });
+
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    alert("I'm a content script and I just heard the request: " + request.keyword);
-});
+    console.log(sender.tab ?
+                "from a content script:" + sender.tab.url :
+                "from the extension");
+   	console.log(request.search);
+   	search(request.search);
+    sendResponse({response: "ok"});
 
-chrome.runtime.onConnect.addListener(function(port) {
-  console.assert(port.name == "sending_search");
-  port.onMessage.addListener(function(msg) {
-  	search(msg.search);
+    return true;
   });
-});
