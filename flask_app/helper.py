@@ -62,6 +62,7 @@ noun_temps = ["Where can I go %s?",
 			"where to find more %s",
 			"where the fuck do I get more %s",
 			"all i want is some %s",
+			"%s wikipedia"
 ]
 
 verb_temps = [
