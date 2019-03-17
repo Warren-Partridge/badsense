@@ -71,12 +71,8 @@ var readyStateCheckInterval = setInterval(function() {
 	if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
 
-		// ----------------------------------------------------------
-		// This part of the script triggers when page is done loading
 		results = $(".r").toArray();
 		links = [];
-
-		console.log(results);	
 
 		for (var i = results.length - 1; i >= 0; i--) {
 			var anchor = $(results[i]).find("a")[0];
@@ -85,11 +81,11 @@ var readyStateCheckInterval = setInterval(function() {
 			}
 		}
 
-		console.log(links);
+		if (links.length > 0) {
+			console.log(links);
+			click(links, done);
+		}
 
-		click(links, done);
-
-		// ----------------------------------------------------------
 	}
 }, 10);
 
