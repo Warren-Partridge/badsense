@@ -5,7 +5,7 @@
 //});
 
 var query_queue = [];
-
+var last_next_query_timestamp = -1;
 
 //example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(
@@ -23,10 +23,26 @@ chrome.extension.onMessage.addListener(
   			break;
 
   		case "next_query":
-  			console.log("aa");
+  			if (last_next_query_timestamp === -1) {
+  				last_next_query_timestamp = new Date().getTime();
+  			}
+
+  			a = (new Date().getTime() - last_next_query_timestamp)
+  			if (a > 10000) {
+  				console.log("next_query took too long! " + a);
+  				sendResponse({});
+  				query_queue = [];
+  				break;
+  			}
+
+  			last_next_query_timestamp = new Date().getTime();
   			var r = {query:query_queue.shift()};
   			console.log(r);
   			sendResponse(r);
+  			break;
+
+  		case "unload":
+  			sendResponse({});
   			break;
 
   		default:

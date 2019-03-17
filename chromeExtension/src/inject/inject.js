@@ -1,6 +1,17 @@
 var results;
 var links;
 var port;
+var unload_expected = false;
+
+function onUnload() {
+	if (!unload_expected) {
+		chrome.extension.sendMessage({type:"unload", expected:unload_expected}, function(response) {});
+	} else {
+		console.log("Expected unload");
+	}
+}
+
+$(window).unload(onUnload);
 
 function clickRequest(link) {
 	if (link) {
@@ -44,9 +55,11 @@ function search(term) {
 }
 
 function done() {
+	unload_expected = true;
 	chrome.extension.sendMessage({type:"next_query"}, function(response) {
 		console.log(response);
 		if (response.query) {
+			unload_expected = true;
 			search(response.query);
 		}
 	});
@@ -55,9 +68,7 @@ function done() {
 
 
 var readyStateCheckInterval = setInterval(function() {
-	console.log("asddsa");
 	if (document.readyState === "complete") {
-		console.log("qwerty");
 		clearInterval(readyStateCheckInterval);
 
 		// ----------------------------------------------------------
