@@ -53,8 +53,15 @@ noun_temps = ["Where can I go %s?",
 			"least expensive %s",
 			"most expensive %s",
 			"%s new version",
-			"%s"
-
+			"i just need some %s in my life",
+			"i could really use some %s right now",
+			"%s addiction",
+			"%s bulk order urgent",
+			"how to tell if addicted to %s",
+			"%s near me urgent",
+			"where to find more %s",
+			"where the fuck do I get more %s",
+			"all i want is some %s",
 ]
 
 verb_temps = [
@@ -68,7 +75,11 @@ verb_temps = [
 			"daily %s blog",
 			"%s store",
 			"science behind %s",
-			"%s"
+			"Where can I go %s?", 
+			"I really love %s.", 
+			"%s interest groups near me", 
+			"is %s a normal hobby",
+			"science behind %s",
 ]
 
 def get_similar(word):
