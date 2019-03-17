@@ -33,12 +33,22 @@ window.addEventListener('load', function load(event) {
   // Button 0 listener
   document.getElementById("button0").onclick = () => {
     let keywordToPass = document.getElementById("button0").innerText;
-
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {keyword: keywordToPass}, function(response) {
-        console.log(response);
-      });
+    console.log(keywordToPass);
+    let resultSearches = $.ajax({
+      url:"https://badsense.herokuapp.com/" + keywordToPass,
+      success: function(response){ 
+        var searchArray = response;
+        console.log(searchArray);
+        var port = chrome.runtime.connect({name: "sending_search"});
+        port.postMessage({search:searchArray.shift()});
+        port.onMessage.addListener(function(msg) {
+          if (msg.response = 'ok' && searchArray.length > 0){
+            port.postMessage({search: searchArray.shift()});
+          }
+        });
+      }
     });
+    
   };
 
   // Button 1 listener
@@ -63,8 +73,5 @@ window.addEventListener('load', function load(event) {
     });
   };
 
-
-
-
-
+  
 });
